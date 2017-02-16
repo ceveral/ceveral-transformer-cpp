@@ -7,7 +7,7 @@
 namespace {{namespace}} {
 
 {{#each enums}}
-enum {{name}} {
+enum {{#if class}}class {{/if}}{{name}} {
 {{#each members}}
   {{{this}}}{{#unless @last}},{{/unless}}
 {{/each}}

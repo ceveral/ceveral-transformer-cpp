@@ -228,7 +228,9 @@ export class QtVisitor extends BaseVisitor {
         e += expression.members.map(m => this.visit(m)).join('\n  ')
         e += '\n)'
         return e;*/
+        
         return {
+            class: !!expression.get('cppenumclass'),
             name: expression.name,
             members: expression.members.map( m => this.visit(m))
         }
