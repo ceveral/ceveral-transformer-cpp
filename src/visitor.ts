@@ -104,11 +104,16 @@ export class QtVisitor extends BaseVisitor {
         let enums  = expression.children
             .filter(m => m.nodeType == Token.NumericEnum).map(m => this.visit(m));
 
+        let constants = expression.children
+            .filter( m => m.nodeType === Token.StringEnum).map(m => this.visit(m));
+
+
         return {
             namespace: this.package,
             imports: [],
             records: records,
             enums: enums,
+            constants: constants,
             filename: Path.basename(this.options.fileName, Path.extname(this.options.fileName))
         }
     }
@@ -256,12 +261,20 @@ export class QtVisitor extends BaseVisitor {
 
         e += '\n)';
         return e;*/
+        return {
+            name: expression.name,
+            members: expression.members.map(m => this.visit(m))
+        }
     }
     visitStringEnumMember(expression: StringEnumMemberExpression): any {
         /*let e = ucFirst(expression.name)
         e += ` ${this.enumName} = "${expression.value}"`;
         this.firstMember = false;
         return e*/
+        return {
+            name: expression.name,
+            value: expression.value
+        }
     }
 
 

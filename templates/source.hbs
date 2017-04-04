@@ -3,6 +3,12 @@
 
 namespace {{namespace}} { 
 
+{{#each constants}}
+{{#each members}}
+const char *{{{../name}}}{{{name}}} = "{{{value}}}"; 
+{{/each}}
+{{/each}}
+
 {{#each records}}
 
 {{name}}::{{name}}() { }
